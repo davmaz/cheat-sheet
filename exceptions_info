@@ -1,0 +1,129 @@
+SYNTAX:
+Here is simple syntax of try....except...else blocks:
+
+try:
+   You do your operations here;
+   ......................
+except ExceptionI:
+   If there is ExceptionI, then execute this block.
+except ExceptionII:
+   If there is ExceptionII, then execute this block.
+   ......................
+else:
+   If there is no exception then execute this block. 
+Here are few important points above the above mentioned syntax:
+
+A single try statement can have multiple except statements. This is useful when the try block contains statements that may throw different types of exceptions.
+
+You can also provide a generic except clause, which handles any exception.
+
+After the except clause(s), you can include an else-clause. The code in the else-block executes if the code in the try: block does not raise an exception.
+
+The else-block is a good place for code that does not need the try: block's protection.
+
+EXAMPLE:
+Here is one more simple example which tries to open a file where you do not have permission to write in the file so it raises an exception:
+
+#!/usr/bin/python
+
+try:
+   fh = open("testfile", "w")
+   fh.write("This is my test file for exception handling!!")
+except IOError:
+   print "Error: can\'t find file or read data"
+else:
+   print "Written content in the file successfully"
+This will produce following result:
+
+Error: can't find file or read data
+
+The try-finally clause:
+You can use a finally: block along with a try: block. The finally block is a place to put any code that must execute, whether the try-block raised an exception or not. The syntax of the try-finally statement is this:
+
+try:
+   You do your operations here;
+   ......................
+   Due to any exception, this may be skipped.
+finally:
+   This would always be executed.
+   ......................
+Note that you can provide except clause(s), or a finally clause, but not both. You can not use else clause as well along with a finally clause.
+
+EXAMPLE:
+#!/usr/bin/python
+
+try:
+   fh = open("testfile", "w")
+   fh.write("This is my test file for exception handling!!")
+finally:
+   print "Error: can\'t find file or read data"
+
+Same example can be written more cleanly as follows:
+
+#!/usr/bin/python
+
+try:
+   fh = open("testfile", "w")
+   try:
+      fh.write("This is my test file for exception handling!!")
+   finally:
+      fh.close()
+except IOError:
+   print "Error: can\'t find file or read data"
+When an exception is thrown in the try block, the execution immediately passes to the finally block. After all the statements in the finally block are executed, the exception is raised again and is handled in the except statements if present in the next higher layer of the try-except statement.
+
+Argument of an Exception:
+An exception can have an argument, which is a value that gives additional information about the problem. The contents of the argument vary by exception. You capture an exception's argument by supplying a variable in the except clause as follows:
+
+try:
+   You do your operations here;
+   ......................
+except ExceptionType, Argument:
+   You can print value of Argument here...
+If you are writing the code to handle a single exception, you can have a variable follow the name of the exception in the except statement. If you are trapping multiple exceptions, you can have a variable follow the tuple of the exception.
+
+This variable will receive the value of the exception mostly containing the cause of the exception. The variable can receive a single value or multiple values in the form of a tuple. This tuple usually contains the error string, the error number, and an error location.
+
+EXAMPLE:
+Following is an example for a single exception:
+
+#!/usr/bin/python
+
+# Define a function here.
+def temp_convert(var):
+   try:
+      return int(var)
+   except ValueError, Argument:
+      print "The argument does not contain numbers\n", Argument
+
+# Call above function here.
+temp_convert("xyz");
+This would produce following result:
+
+The argument does not contain numbers
+invalid literal for int() with base 10: 'xyz'
+Raising an exceptions:
+You can raise exceptions in several ways by using the raise statement. The general syntax for the raise statement.
+
+SYNTAX:
+raise [Exception [, args [, traceback]]]
+Here Exception is the type of exception (for example, NameError) and argument is a value for the exception argument. The argument is optional; if not supplied, the exception argument is None.
+
+The final argument, traceback, is also optional (and rarely used in practice), and, if present, is the traceback object used for the exception
+
+EXAMPLE:
+An exception can be a string, a class, or an object. Most of the exceptions that the Python core raises are classes, with an argument that is an instance of the class. Defining new exceptions is quite easy and can be done as follows:
+
+def functionName( level ):
+   if level < 1:
+      raise "Invalid level!", level
+      # The code below to this would not be executed
+      # if we raise the exception
+Note: In order to catch an exception, an "except" clause must refer to the same exception thrown either class object or simple string. For example to capture above exception we must write our except clause as follows:
+
+try:
+   Business Logic here...
+except "Invalid level!":
+   Exception handling here...
+else:
+   Rest of the code here...

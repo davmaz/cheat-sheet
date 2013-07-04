@@ -1,0 +1,64 @@
+the yield Python keyword
+For a function, yielding means volontarily suspending itself. When the function is called again, it is resumed where it was suspended. The arguments of yield are returned to the caller of the function as if the return keyword had been used. If you already know yield, just skip to the next section.
+
+The following examples only include code from the core Python language, there is no Twistery involved:
+
+>>> def func_with_several_entry_points():
+...     yield 'this string is the first return value'
+...     val = 1+1
+...     yield 'the latest portion of the function was executed',val
+...
+>>> f=func_with_several_entry_points()
+>>> f                                      
+<generator object func_with_several_entry_points at ...>
+On call, a function using yield returns a Python generator object. Generators always have a next() method which, on successive calls, runs the sections of code delimited by yield, one after the other.
+
+>>> f.next()
+'this string is the first return value'
+>>> f.next()
+('the latest portion of the function was executed', 2)
+>>> f.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+Generators object raises a :StopIteration exception to signal when it has reached the end of the last code section, and that it is no use calling it again.
+
+yield is really powerful: for instance, here is a lazy implementation of the fibonacci suite.
+
+>>> def fib(max=1000000):
+...     a,b=1,0
+...     for i in range(max):
+...          yield b
+...          a,b = b,a+b
+Lazy in the sense that it behaves like a huge list but the whole list is never completely computed in one shot and never fully stored in memory: the next element is computed on demand, when the next() method is called:
+
+>>> gen=fib(2)
+>>> gen.next(), gen.next()
+(0, 1)
+>>> gen.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+Generators are integrated with the for keyword which dutifully call the next() method on and on, until the for keyword catches the StopIteration exception:
+
+>>> [n for n in fib(16)]
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610]
+>>> for n in fib(10):
+...     print n,
+...
+0 1 1 2 3 5 8 13 21 34
+But we digress, now back to Twisted, do you see the similarity of concept between the functions using yield and the Twisted chains of callback? Both specify section of codes to be called successively.
+
+A limitation of yield mechanism was lifted in Python2.5, enabling their use with the Twisted reactor: the next section of code of a generator can be called with input data thanks the new send() method instead of next(). Yield, enclosed in parenthesis, is an expression:
+
+>>> def func():
+...     double_received = 2*(yield "Ok, I am ready to receive data")
+...     yield "The double of the data I just received", double_received
+...
+>>> t=func()
+>>> t.next()
+'Ok, I am ready to receive data'
+>>> t.send('Hello')
+('The double of the data I just received', 'HelloHello')
+These changes turn generators from one-way producers of information into both producers and consumers. The reactor can build generators which send network requests the first time they are called, and can send the generator the response data for processing, when it is available.
+

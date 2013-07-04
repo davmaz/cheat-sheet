@@ -1,0 +1,85 @@
+Simple Echo server and client:
+Server:
+#!/usr/bin/env python
+
+# Copyright (c) Twisted Matrix Laboratories.
+# See LICENSE for details.
+
+from twisted.internet.protocol import Protocol, Factory
+from twisted.internet import reactor
+from twisted.protocols.basic import LineReceiver
+
+### Protocol Implementation
+class EchoProtocol(LineReceiver):
+    def lineReceived(self, data):
+        print 'EchoServer received line:{0}'.format(data.rstrip())
+        data_list = []
+        data_list.append( data )
+        cmd = data.split(',')
+        for c in cmd:
+            self.sendLine(c)
+        for l in data_list:
+            self.sendLine(l)
+
+class EchoFactory(Factory):
+    protocol = EchoProtocol
+    def __init__(self):
+        data_list = ''
+
+    def appendList(self, data):
+        data_list += data
+
+
+
+def main():
+    f = EchoFactory()
+    #f.protocol = EchoProtocol
+    reactor.listenTCP(8000, f)
+    reactor.run()
+
+if __name__ == '__main__':
+    main()
+
+
+Client:
+#!/usr/bin/env python
+
+# Copyright (c) Twisted Matrix Laboratories.
+# See LICENSE for details.
+
+
+from twisted.internet.protocol import ClientFactory
+from twisted.protocols.basic import LineReceiver
+from twisted.internet import reactor
+import sys
+
+class EchoClient(LineReceiver):
+
+    def connectionMade(self):
+        self.sendLine('frq?,35.40,frq_OK')
+        self.sendLine('clc,44.33,clc_OK')
+        self.sendLine('DONE')
+
+    def lineReceived(self, line):
+        print "received:", line
+        if line=='DONE':
+            self.transport.loseConnection()
+
+class EchoClientFactory(ClientFactory):
+    protocol = EchoClient
+
+    def clientConnectionFailed(self, connector, reason):
+        print 'connection failed:', reason.getErrorMessage()
+        reactor.stop()
+
+    def clientConnectionLost(self, connector, reason):
+        print 'connection lost:', reason.getErrorMessage()
+        reactor.stop()
+
+def main():
+    factory = EchoClientFactory()
+    reactor.connectTCP('localhost', 8000, factory)
+    reactor.run()
+
+if __name__ == '__main__':
+    main()
