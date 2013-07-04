@@ -1,0 +1,105 @@
+Replacing a string in a file:
+#!/usr/bin/env python
+import os, sys
+import string
+
+def replace(file, search_for, replace_with):
+    # replace strings in a text file
+    back = os.path.splitext(file)[0] + ".bak"
+    temp = os.path.splitext(file)[0] + ".tmp"
+    try:
+        # remove old temp file, if any
+        os.remove(temp)
+    except os.error:
+        pass
+    fi = open(file)
+    fo = open(temp, "w")
+    for s in fi.readlines():
+        fo.write(string.replace(s, search_for, replace_with))
+    fi.close()
+    fo.close()
+    try:
+        # remove old backup file, if any
+        os.remove(back)
+    except os.error:
+        pass
+    # rename original to backup...
+    os.rename(file, back)
+    # ...and temporary to original
+    os.rename(temp, file)
+
+def main():
+    if len(sys.argv) != 4:
+        print 'Usage: {0} file fromString toString'.format(sys.argv[0])
+        exit(-1)
+    elif sys.argv[1].strip('./') == sys.argv[0].strip('./'):
+        print 'Give a filename different from argv[0] ({0})!'.format(sys.argv[0])
+        exit(-1)
+    else:
+        replace( sys.argv[1], sys.argv[2], sys.argv[3] )
+
+if __name__ == '__main__':
+    main()
+
+
+Print the first word on each line of a file:
+#!/usr/bin/env python
+import os, sys
+
+def scanner(fileobject, linehandler):
+    for line in fileobject:
+        if( line.splitlines()[0] != '' ):
+            linehandler(line)
+
+def firstword(line):
+    if(line.rstrip() != '' and line.strip() != None):
+        print line.split()[0]
+
+file = open(sys.argv[1])
+print scanner(file, firstword)
+
+Use the regular expression functionality in Python to parse a line:
+#!/usr/bin/env python
+import re
+
+pattern = '[a-z]+:[0-9,\.,-]+.'
+list = 'freq:10.2_start:10_stop:-20.1'
+
+for match in re.findall(pattern, list):
+    print match
+
+class Commands(object):
+    def __init__(self):
+        self.cmd_list = []
+        self.num_cmds = 0
+        self.pos = 0
+    def add(self, cmd):
+        self.cmd_list.append(cmd)
+        self.num_cmds += 1
+    def show(self):
+        for l in self.cmd_list:
+            print 'command:',l
+    def __iter__(self):
+        self.pos = 0
+        print 'Returning from __init__, with pos={0}'.format(self.pos)
+        print 'self.cmd_list[pos]:{0}'.format(self.cmd_list[0])
+        return self
+    def next(self):
+        print 'next called, yielding...'
+        if( self.pos < len(cmd_list) ):
+            yield self.cmd_list[self.pos]
+            self.pos += 1
+        else:
+            raise StopIteration
+
+
+
+
+
+
+c = Commands()
+c.add('one')
+c.add('two')
+c.add('three')
+c.show()
+

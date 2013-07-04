@@ -1,0 +1,42 @@
+Decorators allow you to inject or modify code in functions or classes. Sounds a bit like Aspect-Oriented Programming (AOP) in Java, doesn't it? Except that it's both much simpler and (as a result) much more powerful. For example, suppose you'd like to do something at the entry and exit points of a function (such as perform some kind of security, tracing, locking, etc. -- all the standard arguments for AOP). With decorators, it looks like this:
+
+@entryExit
+def func1():
+    print "inside func1()"
+
+@entryExit
+def func2():
+    print "inside func2()"
+The @ indicates the application of the decorator.
+
+A function decorator is applied to a function definition by placing it on the line before that function definition begins. For example:
+
+@myDecorator
+def aFunction():
+    print "inside aFunction"
+When the compiler passes over this code, aFunction() is compiled and the resulting function object is passed to the myDecorator code, which does something to produce a function-like object that is then substituted for the original aFunction().
+
+What should the decorator do? Well, it can do anything but usually you expect the original function code to be used at some point. This is not required, however:
+
+class myDecorator(object):
+
+    def __init__(self, f):
+        print "inside myDecorator.__init__()"
+        f() # Prove that function definition has completed
+
+    def __call__(self):
+        print "inside myDecorator.__call__()"
+
+@myDecorator
+def aFunction():
+    print "inside aFunction()"
+
+print "Finished decorating aFunction()"
+
+aFunction()
+When you run this code, you see:
+
+inside myDecorator.__init__()
+inside aFunction()
+Finished decorating aFunction()
+inside myDecorator.__call__()

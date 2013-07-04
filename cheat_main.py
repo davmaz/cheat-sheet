@@ -17,6 +17,11 @@ class PythonCheatSheet(QtGui.QDialog, Ui_PythonCheatSheet):
         self.ui.keywords_button.clicked.connect(self.keywords_info)
         self.ui.expressions_button.clicked.connect(self.expressions_info)
         self.ui.conditionals_button.clicked.connect(self.conditionals_info)
+        self.ui.decorators_button.clicked.connect(self.decorators_info)
+        self.ui.exceptions_button.clicked.connect(self.exceptions_info)
+        self.ui.yield_button.clicked.connect(self.yield_info)
+        self.ui.twisted_button.clicked.connect(self.twisted_info)
+        self.ui.examples_button.clicked.connect(self.examples_info)
         self.ui.clear_button.clicked.connect(self.clear)
         self.ui.search_text.returnPressed.connect(self.do_search)
         #self.cursor_location = self.browser.moveCursor(QTextCursor.MoveOperation(QTextCursor.Start))
@@ -67,6 +72,41 @@ class PythonCheatSheet(QtGui.QDialog, Ui_PythonCheatSheet):
     def conditionals_info(self):
         with open('./conditionals_info') as fd:
             self.browser.append('\nConditionals:')
+            lines = fd.readlines()
+            for line in lines:
+                self.browser.append(line.rstrip())
+
+    def decorators_info(self):
+        with open('./decorators_info') as fd:
+            self.browser.append('\nDecorators:')
+            lines = fd.readlines()
+            for line in lines:
+                self.browser.append(line.rstrip())
+
+    def exceptions_info(self):
+        with open('./exceptions_info') as fd:
+            self.browser.append('\nExceptions:')
+            lines = fd.readlines()
+            for line in lines:
+                self.browser.append(line.rstrip())
+
+    def yield_info(self):
+        with open('./yield_info') as fd:
+            self.browser.append('\nYield:')
+            lines = fd.readlines()
+            for line in lines:
+                self.browser.append(line.rstrip())
+
+    def twisted_info(self):
+        with open('./twisted_info') as fd:
+            self.browser.append('\nTwisted:')
+            lines = fd.readlines()
+            for line in lines:
+                self.browser.append(line.rstrip())
+
+    def examples_info(self):
+        with open('./examples_info') as fd:
+            self.browser.append('\nExamples:')
             lines = fd.readlines()
             for line in lines:
                 self.browser.append(line.rstrip())

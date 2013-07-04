@@ -1,0 +1,74 @@
+SYNTAX:
+Here is simple syntax of try....except...else blocks:
+
+try:
+   You do your operations here;
+   ......................
+except ExceptionI:
+   If there is ExceptionI, then execute this block.
+except ExceptionII:
+   If there is ExceptionII, then execute this block.
+   ......................
+else:
+   If there is no exception then execute this block. 
+Here are few important points above the above mentioned syntax:
+
+A single try statement can have multiple except statements. This is useful when the try block contains statements that may throw different types of exceptions.
+
+You can also provide a generic except clause, which handles any exception.
+
+After the except clause(s), you can include an else-clause. The code in the else-block executes if the code in the try: block does not raise an exception.
+
+The else-block is a good place for code that does not need the try: block's protection.
+
+EXAMPLE:
+Here is one more simple example which tries to open a file where you do not have permission to write in the file so it raises an exception:
+
+#!/usr/bin/python
+
+try:
+   fh = open("testfile", "w")
+   fh.write("This is my test file for exception handling!!")
+except IOError:
+   print "Error: can\'t find file or read data"
+else:
+   print "Written content in the file successfully"
+This will produce following result:
+
+Error: can't find file or read data
+
+The try-finally clause:
+You can use a finally: block along with a try: block. The finally block is a place to put any code that must execute, whether the try-block raised an exception or not. The syntax of the try-finally statement is this:
+
+try:
+   You do your operations here;
+   ......................
+   Due to any exception, this may be skipped.
+finally:
+   This would always be executed.
+   ......................
+Note that you can provide except clause(s), or a finally clause, but not both. You can not use else clause as well along with a finally clause.
+
+EXAMPLE:
+#!/usr/bin/python
+
+try:
+   fh = open("testfile", "w")
+   fh.write("This is my test file for exception handling!!")
+finally:
+   print "Error: can\'t find file or read data"
+
+Same example can be written more cleanly as follows:
+
+#!/usr/bin/python
+
+try:
+   fh = open("testfile", "w")
+   try:
+      fh.write("This is my test file for exception handling!!")
+   finally:
+      fh.close()
+except IOError:
+   print "Error: can\'t find file or read data"
+When an exception is thrown in the try block, the execution immediately passes to the finally block. After all the statements in the finally block are executed, the exception is raised again and is handled in the except statements if present in the next higher layer of the try-except statement.
+
