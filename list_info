@@ -1,0 +1,10 @@
+list Comprehension:
+    lst = [x*x for x in range(0,10)]
+list to string:
+    \' \'.join(list_name)
+list append():
+    a=[]
+    a.append("test")
+    a.append(5)
+multi-dimensional lists:
+    a=[[0,1,2],[3,4,5]]

@@ -1,0 +1,66 @@
+An expression is a phrase of code that Python evaluates to produce a value. The simplest expressions are literals and identifiers. You build other expressions by joining subexpressions with the operators and/or delimiters in Table 4-2. This table lists operators in decreasing order of precedence, higher precedence before lower. Operators listed together have the same precedence. The third column lists the associativity of the operator: L (left-to-right), R (right-to-left), or NA (nonassociative).
+
+Table 4-2. Operator precedence in expressions
+
+Operator	Description	Associativity
+`expr,...`	String conversion	NA
+{key:expr,...}	Dictionary creation	NA
+[expr,...]	List creation	NA
+(expr,...)	Tuple creation or just parentheses	NA
+f(expr,...)	Function call	L
+x[index:index]	Slicing	L
+x[index]	Indexing	L
+x.att r	Attribute reference	L
+x**y	Exponentiation ( x to y th power)	R
+~x	Bitwise NOT	NA
++x , -x	Unary plus and minus	NA
+x*y , x/y , x//y , x%y	Multiplication, division, truncating division, remainder	L
+x+y , x-y	Addition, subtraction	L
+x<<y , x>>y	Left-shift, right-shift	L
+x&y	Bitwise AND	L
+x^y	Bitwise XOR	L
+x|y	Bitwise OR	L
+x<y , x<=y , x>y , xy , x<<>>y ,	Comparisons (less than, less than or	NA
+x!=y , x==y	equal, greater than, greater than or equal, inequality, equality) a	 
+x is y , x is not y	Identity tests	NA
+x in y , x not in y	Membership tests	NA
+not x	Boolean NOT	NA
+x and y	Boolean AND	L
+x or y	Boolean OR	L
+lambda arg,...: expr	Anonymous simple function	NA
+a <> and != are alternate forms of the same operator. != is the preferred version; <> is obsolete.
+
+In Table 4-2, expr,  key ,  f,  index ,  x , and y indicate any expression, while attr and arg  indicate any identifier. The notation ,... means commas join zero or more repetitions, except for string conversion, where you need one or more repetitions.
+
+A trailing comma is allowed and innocuous in all such cases, except for string conversion, where it's forbidden. The string conversion operator, with its quirky behavior, is not recommended; use built-in function repr (covered in repr on page 166) instead.
+
+Comparison Chaining
+
+You can chain comparisons, implying a logical and. For example:
+
+  a < b <= c < d
+
+has the same meaning as:
+
+  a < b and b <= c and c < d
+
+The chained form is more readable and evaluates each subexpression once at the most.
+
+Short-Circuiting Operators
+
+Operators and and or short-circuit their operands' evaluation: the righthand operand evaluates only if its value is needed to get the truth value of the entire and or or operation.
+
+In other words, x  and y  first evaluates x. If x  is false, the result is x ; otherwise, the result is y. Similarly, x or y first evaluates x. If x  is true, the result is x ; otherwise, the result is y .
+
+and and or don't force their results to be True or False, but rather return one or the other of their operands. This lets you use these operators more generally, not just in Boolean contexts. and and or, because of their short-circuiting semantics, differ from all other operators, which fully evaluate all operands before performing the operation. and and or let the left operand act as a guard for the right operand.
+
+
+Python 2.5 introduces another short-circuiting operator, the ternary operator if/else :
+
+  whentrue if condition else whenfalse
+
+Each of whentrue , whenfalse , and condition  is an arbitrary expression. condition evaluates first. If condition  is true, the result is whentrue ; otherwise, the result is whenfalse . Only one of the two subexpressions whentrue  and whenfalse evaluates, depending on the truth value of condition.
+
+The order of the three subexpressions in this new ternary operator may be a bit confusing. Also, a recommended style is to always place parentheses around the whole expression.
+
+

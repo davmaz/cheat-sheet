@@ -1,0 +1,10 @@
+Strings can be specified using single quotes or double quotes. Strings do not expand escape sequences unless it is defined as a raw string by placing an r before the first quote: print 'I\'ll be back.'.
+print r'The newline \n will not expand'
+a = "Gators"
+print "The value of a is \t" + a
+-> The value of a is       Gators
+If a string is not defined as raw, escapes such as \n, \r, \t, \\, and \" may be used. 
+Optional syntax: Strings that start and end with """ may span multiple lines: print """
+This is an example of a string in the heredoc syntax.
+This text can span multiple lines
+"""

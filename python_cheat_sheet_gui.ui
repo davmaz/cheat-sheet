@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PythonCheatSheet</class>
+ <widget class="QDialog" name="PythonCheatSheet">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>560</width>
+    <height>551</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Python Cheat Sheet</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_4">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>199</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="2">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>205</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="BasicsGroupBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="title">
+        <string>Basics</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="5" column="0">
+         <widget class="QPushButton" name="conditionals_button">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Conditionals</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="strings_button">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Strings</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="expressions_button">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Expressions</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="lists_button">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Lists</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="keywords_button">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Keywords</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="search_text"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="search_label">
+       <property name="text">
+        <string>Search</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QTextBrowser" name="results_browser"/>
+   </item>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>186</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="clear_button">
+       <property name="text">
+        <string>Clear</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
