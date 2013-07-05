@@ -109,11 +109,6 @@ class Commands(object):
         else:
             raise StopIteration
 
-
-
-
-
-
 c = Commands()
 c.add('one')
 c.add('two')
