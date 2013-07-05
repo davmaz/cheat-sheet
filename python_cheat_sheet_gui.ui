@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>773</width>
-    <height>733</height>
+    <width>568</width>
+    <height>582</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -117,7 +117,7 @@
      </layout>
     </widget>
    </item>
-   <item row="0" column="1" colspan="2">
+   <item row="0" column="1">
     <widget class="QGroupBox" name="Important">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -217,36 +217,36 @@
      </layout>
     </widget>
    </item>
+   <item row="0" column="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>179</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item row="1" column="0">
     <widget class="QLabel" name="search_label">
      <property name="text">
-      <string>Search</string>
+      <string>Search:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" colspan="2">
+   <item row="1" column="1">
     <widget class="QLineEdit" name="search_text"/>
    </item>
    <item row="2" column="0" colspan="3">
     <widget class="QTextBrowser" name="results_browser"/>
    </item>
-   <item row="3" column="0" colspan="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>445</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="2">
+   <item row="3" column="1">
     <widget class="QPushButton" name="clear_button">
      <property name="text">
       <string>Clear</string>
@@ -256,8 +256,36 @@
      </property>
     </widget>
    </item>
+   <item row="3" column="2">
+    <widget class="QPushButton" name="quit_button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Quit</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>keywords_button</tabstop>
+  <tabstop>search_text</tabstop>
+  <tabstop>lists_button</tabstop>
+  <tabstop>strings_button</tabstop>
+  <tabstop>expressions_button</tabstop>
+  <tabstop>conditionals_button</tabstop>
+  <tabstop>decorators_button</tabstop>
+  <tabstop>exceptions_button</tabstop>
+  <tabstop>yield_button</tabstop>
+  <tabstop>twisted_button</tabstop>
+  <tabstop>examples_button</tabstop>
+  <tabstop>clear_button</tabstop>
+  <tabstop>results_browser</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
