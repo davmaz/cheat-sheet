@@ -12,6 +12,7 @@ class PythonCheatSheet(QtGui.QDialog, Ui_PythonCheatSheet):
         self.ui = Ui_PythonCheatSheet()
         self.ui.setupUi(self)
         self.browser = self.ui.results_browser
+        self.browser.acceptRichText
         self.ui.lists_button.clicked.connect(self.list_info)
         self.ui.strings_button.clicked.connect(self.string_info)
         self.ui.keywords_button.clicked.connect(self.keywords_info)
@@ -23,15 +24,9 @@ class PythonCheatSheet(QtGui.QDialog, Ui_PythonCheatSheet):
         self.ui.twisted_button.clicked.connect(self.twisted_info)
         self.ui.examples_button.clicked.connect(self.examples_info)
         self.ui.clear_button.clicked.connect(self.clear)
+        self.ui.quit_button.clicked.connect(self.reject)
         self.ui.search_text.returnPressed.connect(self.do_search)
-        #self.cursor_location = self.browser.moveCursor(QTextCursor.MoveOperation(QTextCursor.Start))
         self.first_search = True
-
-    def reject(self):
-        QtCore.QCoreApplication.instance().quit()
-
-    def clear(self):
-        self.browser.clear()
 
     def do_search(self):
         search_for = self.ui.search_text.text()
@@ -86,6 +81,12 @@ class PythonCheatSheet(QtGui.QDialog, Ui_PythonCheatSheet):
     def examples_info(self):
         with open('./examples_info') as fd:
             self.add_data('Examples', fd)
+
+    def clear(self):
+        self.browser.clear()
+
+    def reject(self):
+        QtCore.QCoreApplication.instance().quit()
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
