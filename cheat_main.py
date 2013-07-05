@@ -41,75 +41,51 @@ class PythonCheatSheet(QtGui.QDialog, Ui_PythonCheatSheet):
         if self.browser.find(search_for) == False:
             self.first_search = True # Wrap searching
 
+    def add_data(self, name, data_fd):
+        self.browser.append('\n{0}:'.format(name))
+        lines = data_fd.readlines()
+        for line in lines:
+            self.browser.append(line.rstrip())
+
     def list_info(self):
         with open('./list_info') as fd:
-            self.browser.append('\nLists:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Lists', fd)
 
     def string_info(self):
         with open('./string_info') as fd:
-            self.browser.append('\nStrings:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Strings', fd)
 
     def keywords_info(self):
         with open('./keywords_info') as fd:
-            self.browser.append('\nKeywords:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Keywords', fd)
 
     def expressions_info(self):
         with open('./expressions_info') as fd:
-            self.browser.append('\nExpressions:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Expressions', fd)
 
     def conditionals_info(self):
         with open('./conditionals_info') as fd:
-            self.browser.append('\nConditionals:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Conditionals', fd)
 
     def decorators_info(self):
         with open('./decorators_info') as fd:
-            self.browser.append('\nDecorators:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Decorator', fd)
 
     def exceptions_info(self):
         with open('./exceptions_info') as fd:
-            self.browser.append('\nExceptions:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Exceptions', fd)
 
     def yield_info(self):
         with open('./yield_info') as fd:
-            self.browser.append('\nYield:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Yield', fd)
 
     def twisted_info(self):
         with open('./twisted_info') as fd:
-            self.browser.append('\nTwisted:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Twisted', fd)
 
     def examples_info(self):
         with open('./examples_info') as fd:
-            self.browser.append('\nExamples:')
-            lines = fd.readlines()
-            for line in lines:
-                self.browser.append(line.rstrip())
+            self.add_data('Examples', fd)
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
