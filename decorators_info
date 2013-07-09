@@ -70,3 +70,20 @@ Exited func1
 Entering func2
 inside func2()
 Exited func2
+
+def makebold(fn):
+    def wrapped():
+        return "<b>" + fn() + "</b>"
+    return wrapped
+
+def makeitalic(fn):
+    def wrapped():
+        return "<i>" + fn() + "</i>"
+    return wrapped
+
+@makebold
+@makeitalic
+def hello():
+    return "hello world"
+
+print hello() ## returns <b><i>hello world</i></b>
